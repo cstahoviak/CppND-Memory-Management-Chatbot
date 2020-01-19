@@ -9,6 +9,8 @@ class GraphNode; // forward declaration
 class GraphEdge
 {
 private:
+    // NOTE: graph edges do not take on owenership of nodes
+
     // data handles (not owned)
     GraphNode *_childNode;
     GraphNode *_parentNode;

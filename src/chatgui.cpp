@@ -118,9 +118,10 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     ////
 
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
+    _chatLogic = new ChatLogic();   // instantiate ChatLogic object on heap
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
+    // "this" is the pointer to the current instance of the ChatBotPanelDialog object
     _chatLogic->SetPanelDialogHandle(this);
 
     // load answer graph from file

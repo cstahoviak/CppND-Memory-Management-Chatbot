@@ -1,6 +1,8 @@
 #include "graphnode.h"
 #include "graphedge.h"
 
+// NOTE: No tasks to be completed in this file
+
 GraphEdge::GraphEdge(int id)
 {
     _id = id;

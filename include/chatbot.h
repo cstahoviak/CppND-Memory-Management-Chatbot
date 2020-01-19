@@ -15,6 +15,8 @@ private:
 
     // data handles (not owned)
     GraphNode *_currentNode;
+    // NOTE: when a dead-end in the graph is reached the ChatBot will
+    // return to the "root node"
     GraphNode *_rootNode;
     ChatLogic *_chatLogic;
 
