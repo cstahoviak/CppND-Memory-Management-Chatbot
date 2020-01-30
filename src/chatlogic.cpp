@@ -16,9 +16,11 @@ ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
+    std::cout << "ChatLogic Constructor" << std::endl;
 
     // create instance of chatbot
     _chatBot = new ChatBot("../images/chatbot.png");
+    std::cout << "\t_chatBot instantiated:\t\t" << _chatBot << std::endl;
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
     _chatBot->SetChatLogicHandle(this);
@@ -31,19 +33,29 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
+    std::cout << "ChatLogic Destructor" << std::endl;
 
     // delete chatbot instance
-    delete _chatBot;
+    // don't need to comment this out to fix the seg fault like I thought..
+    std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
+    delete _chatBot;     // segfault fixed (2/2)
+
+    // NOTE: below is unfamiliar for loop syntax. Why not do this:
+    // for( auto node : _nodes ) {
+    //     delete *node;
+    // }
 
     // delete all nodes
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     {
+        std::cout << "\tdeleting node at:\t\t" << &it << std::endl;
         delete *it;
     }
 
     // delete all edges
     for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
     {
+        std::cout << "\tdeleting edge at:\t\t" << &it << std::endl;
         delete *it;
     }
 

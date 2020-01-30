@@ -11,6 +11,8 @@ class ChatBot
 {
 private:
     // data handles (owned)
+    // NOTE: "will require use of move semantics to ensure than the handle to
+    // this heap-allocated object is not lost."
     wxBitmap *_image; // avatar image
 
     // data handles (not owned)

@@ -35,7 +35,7 @@ private:
     ////
     //// EOF STUDENT CODE
 
-    // proprietary members (loaded from 'answergraph.txt' file)
+    // (owned) proprietary members (loaded from 'answergraph.txt' file)
     int _id;
     // could have multiple answers and randomize them, so as not to
     // have a completely deterministic ChatBot

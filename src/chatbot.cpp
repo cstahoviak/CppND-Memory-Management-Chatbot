@@ -28,6 +28,7 @@ ChatBot::ChatBot(std::string filename)
 
     // load image into heap memory
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
+    std::cout << "\tChatBot _image instantiated:\t" << _image << std::endl;
 }
 
 ChatBot::~ChatBot()
@@ -37,13 +38,18 @@ ChatBot::~ChatBot()
     // deallocate heap memory
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
     {
-        delete _image;
-        _image = NULL;
+        std::cout << "\tChatBot _image deleted (1):\t" << _image << std::endl;
+        delete _image;  // segfault happening at this line
+        std::cout << "\t\t\t\t\tHERE" << std::endl;
+        _image = NULL;  // Q: Why do this?
+        std::cout << "\tChatBot _image deleted (2):\t" << _image << std::endl;
     }
 }
 
 //// STUDENT CODE
 ////
+
+// Q: What happens here?
 
 ////
 //// EOF STUDENT CODE

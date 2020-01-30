@@ -27,7 +27,7 @@ public:
     ~ChatBotPanelDialog();
 
     // getter / setter
-    ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+    ChatLogic* GetChatLogicHandle() { return _chatLogic; }
 
     // events
     void paintEvent(wxPaintEvent &evt);
@@ -85,6 +85,7 @@ public:
     void paintNow();
     void render(wxDC &dc);
 
+    // what is an event table?
     DECLARE_EVENT_TABLE()
 };
 

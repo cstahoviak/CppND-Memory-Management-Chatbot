@@ -17,7 +17,7 @@ private:
     ////
 
     // data handles (owned)
-    // NOTE: ownership of edges to be moved into some of the edges
+    // NOTE: "ownership of edges to be moved into some of the nodes"
     std::vector<GraphNode *> _nodes;
     std::vector<GraphEdge *> _edges;
 

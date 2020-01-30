@@ -1,8 +1,12 @@
 #include "graphedge.h"
 #include "graphnode.h"
 
+// added by me
+#include <iostream>
+
 GraphNode::GraphNode(int id)
 {
+    std::cout << "GraphNode Constructor" << std::endl;
     _id = id;
 }
 
@@ -11,7 +15,13 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+    std::cout << "GraphNode Destructor" << std::endl;
+
+    std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
+    // Q: Why does it not segfault here??
+    delete _chatBot;
+
+    // if( _chatBot != nullptr) delete _chatBot;
 
     ////
     //// EOF STUDENT CODE
