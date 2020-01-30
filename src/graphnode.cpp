@@ -6,7 +6,7 @@
 
 GraphNode::GraphNode(int id)
 {
-    std::cout << "GraphNode Constructor" << std::endl;
+    // std::cout << "GraphNode Constructor" << std::endl;
     _id = id;
 }
 
@@ -15,7 +15,7 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    std::cout << "GraphNode Destructor" << std::endl;
+    // std::cout << "GraphNode Destructor" << std::endl;
 
     // Q: Why does it not segfault at the delete statement??
     // std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
