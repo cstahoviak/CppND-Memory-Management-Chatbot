@@ -17,11 +17,9 @@ GraphNode::~GraphNode()
 
     std::cout << "GraphNode Destructor" << std::endl;
 
-    std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
-    // Q: Why does it not segfault here??
-    delete _chatBot;
-
-    // if( _chatBot != nullptr) delete _chatBot;
+    // Q: Why does it not segfault at the delete statement??
+    // std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
+    // delete _chatBot;     // commeted out to complete Task Zero
 
     ////
     //// EOF STUDENT CODE
