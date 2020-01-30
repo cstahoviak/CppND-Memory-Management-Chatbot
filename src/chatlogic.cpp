@@ -48,14 +48,14 @@ ChatLogic::~ChatLogic()
     // delete all nodes
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     {
-        std::cout << "\tdeleting node at:\t\t" << &it << std::endl;
+        // std::cout << "\tdeleting node at:\t\t" << &it << std::endl;
         delete *it;
     }
 
     // delete all edges
     for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
     {
-        std::cout << "\tdeleting edge at:\t\t" << &it << std::endl;
+        // std::cout << "\tdeleting edge at:\t\t" << &it << std::endl;
         delete *it;
     }
 

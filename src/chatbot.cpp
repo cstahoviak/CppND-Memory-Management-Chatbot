@@ -40,7 +40,6 @@ ChatBot::~ChatBot()
     {
         std::cout << "\tChatBot _image deleted (1):\t" << _image << std::endl;
         delete _image;  // segfault happening at this line
-        std::cout << "\t\t\t\t\tHERE" << std::endl;
         _image = NULL;  // Q: Why do this?
         std::cout << "\tChatBot _image deleted (2):\t" << _image << std::endl;
     }
