@@ -9,6 +9,8 @@
 // added by me
 #include <iostream>
 
+using namespace std;
+
 // size of chatbot window
 const int width = 414;
 const int height = 736;
@@ -21,7 +23,7 @@ std::string imgBasePath = dataPath + "images/";
 
 bool ChatBotApp::OnInit()
 {
-    std::cout << "ChatBotApp::OnInit()" << std::endl;
+    cout << "ChatBotApp::OnInit()" << endl;
 
     // create window with name and show it
     ChatBotFrame *chatBotFrame = new ChatBotFrame(wxT("Udacity ChatBot"));
@@ -112,7 +114,7 @@ END_EVENT_TABLE()
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     : wxScrolledWindow(parent, id)
 {
-    std::cout << "ChatBotPanelDialog Constructor" << std::endl;
+    cout << "ChatBotPanelDialog Constructor" << endl;
 
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
@@ -127,7 +129,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     // create chat logic instance
     // _chatLogic = new ChatLogic();   // instantiate ChatLogic object on heap
     _chatLogic = std::make_unique<ChatLogic>();
-    std::cout << "\t_chatLogic instantiated:\t" << _chatLogic.get() << std::endl;
+    cout << "\t_chatLogic instantiated:\t" << _chatLogic.get() << endl;
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     // "this" is the pointer to the current instance of the ChatBotPanelDialog object
@@ -145,9 +147,9 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    std::cout << "ChatBotPanelDialog Destructor" << std::endl;
+    cout << "ChatBotPanelDialog Destructor" << endl;
 
-    std::cout << "\t_chatLogic deleted:\t\t" << _chatLogic.get() << std::endl;
+    cout << "\t_chatLogic deleted:\t\t" << _chatLogic.get() << endl;
     // delete _chatLogic;   // delete no longer necessary with smart pointers
 
     ////

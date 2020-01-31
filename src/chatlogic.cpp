@@ -38,7 +38,7 @@ ChatLogic::~ChatLogic()
     // delete chatbot instance
     // don't need to comment this out to fix the seg fault like I thought..
     std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
-    delete _chatBot;     // segfault fixed (2/2)
+    delete _chatBot;
 
     // NOTE: below is unfamiliar for loop syntax. Why not do this:
     // for( auto node : _nodes ) {
