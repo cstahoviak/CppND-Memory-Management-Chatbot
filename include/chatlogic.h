@@ -17,16 +17,16 @@ private:
     ////
 
     // data handles (owned)
-    // NOTE: "ownership of edges to be moved into some of the nodes."
     // NOTE: _nodes (currently) stores a vector of raw pointers to
     // GraphNode objects on the HEAP.
+    // std::vector<GraphNode *> _nodes;
 
     /* GOAL: "Adapt _nodes such that the instances of GraphNode objects to which
     * the vector elements refer are EXCLUSIVELY owned by the ChatLogic class."
     */
     std::vector<std::unique_ptr<GraphNode>> _nodes;
 
-    // std::vector<GraphNode *> _nodes;
+    // NOTE: "ownership of edges to be moved into some of the nodes."
     std::vector<GraphEdge *> _edges;
 
     ////

@@ -11,16 +11,18 @@
 #include "chatbot.h"
 #include "chatlogic.h"
 
+// added by me 
+using namespace std;
 
 ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
-    std::cout << "ChatLogic Constructor" << std::endl;
+    cout << "ChatLogic Constructor" << endl;
 
     // create instance of chatbot
     _chatBot = new ChatBot("../images/chatbot.png");
-    std::cout << "\t_chatBot instantiated:\t\t" << _chatBot << std::endl;
+    cout << "\t_chatBot instantiated:\t\t" << _chatBot << endl;
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
     _chatBot->SetChatLogicHandle(this);
@@ -33,11 +35,11 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-    std::cout << "ChatLogic Destructor" << std::endl;
+    cout << "ChatLogic Destructor" << endl;
 
     // delete chatbot instance
     // don't need to comment this out to fix the seg fault like I thought..
-    std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
+    cout << "\t_chatBot deleted:\t\t" << _chatBot << endl;
     delete _chatBot;
 
     // NOTE: below is unfamiliar for loop syntax. Why not do this:
@@ -48,14 +50,14 @@ ChatLogic::~ChatLogic()
     // delete all nodes
     // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     // {
-    //     // std::cout << "\tdeleting node at:\t\t" << &it << std::endl;
+    //     // cout << "\tdeleting node at:\t\t" << &it << endl;
     //     delete *it;
     // }
 
     // delete all edges
     for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
     {
-        // std::cout << "\tdeleting edge at:\t\t" << &it << std::endl;
+        // cout << "\tdeleting edge at:\t\t" << &it << endl;
         delete *it;
     }
 
@@ -197,7 +199,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                 }
                 else
                 {
-                    std::cout << "Error: ID missing. Line is ignored!" << std::endl;
+                    cout << "Error: ID missing. Line is ignored!" << endl;
                 }
             }
         } // eof loop over all lines in the file
@@ -207,7 +209,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     } // eof check for file availability
     else
     {
-        std::cout << "File could not be opened!" << std::endl;
+        cout << "File could not be opened!" << endl;
         return;
     }
 
@@ -230,20 +232,20 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     //         }
     //         else
     //         {
-    //             std::cout << "ERROR : Multiple root nodes detected" << std::endl;
+    //             cout << "ERROR : Multiple root nodes detected" << endl;
     //         }
     //     }
     // }
 
-    for( auto const &node : _nodes ) {
+    for( auto const &node_ptr : _nodes ) {
         // search for nodes which have no incoming edges
-        if (node->GetNumberOfParents() == 0) {
+        if (node_ptr->GetNumberOfParents() == 0) {
             if (rootNode == nullptr) {
                 // assign current node to root
-                rootNode = node.get();
+                rootNode = node_ptr.get();
             }
             else {
-                std::cout << "ERROR : Multiple root nodes detected" << std::endl;
+                cout << "ERROR : Multiple root nodes detected" << endl;
             }
         }
     }
