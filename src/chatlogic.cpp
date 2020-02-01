@@ -239,9 +239,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         // search for nodes which have no incoming edges
         if (node->GetNumberOfParents() == 0) {
             if (rootNode == nullptr) {
-                // Q: Still not sure exactly how it.get() differs from
-                // (*it).get() in this context? Why need to dereference?
-                rootNode = node.get(); // assign current node to root
+                // assign current node to root
+                rootNode = node.get();
             }
             else {
                 std::cout << "ERROR : Multiple root nodes detected" << std::endl;
