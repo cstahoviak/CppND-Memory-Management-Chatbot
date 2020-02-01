@@ -216,21 +216,34 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
     // identify root node
     GraphNode *rootNode = nullptr;
-    // std::unique_ptr<GraphNode> rootNode = nullptr;
-    for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
-    {
-        // search for nodes which have no incoming edges
-        if ((*it)->GetNumberOfParents() == 0)
-        {
+    // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
+    // {
+    //     // search for nodes which have no incoming edges
+    //     if ((*it)->GetNumberOfParents() == 0)
+    //     {
 
-            if (rootNode == nullptr)
-            {
+    //         if (rootNode == nullptr)
+    //         {
+    //             // Q: Still not sure exactly how it.get() differs from
+    //             // (*it).get() in this context? Why need to dereference?
+    //             rootNode = (*it).get(); // assign current node to root
+    //         }
+    //         else
+    //         {
+    //             std::cout << "ERROR : Multiple root nodes detected" << std::endl;
+    //         }
+    //     }
+    // }
+
+    for( auto const &node : _nodes ) {
+        // search for nodes which have no incoming edges
+        if (node->GetNumberOfParents() == 0) {
+            if (rootNode == nullptr) {
                 // Q: Still not sure exactly how it.get() differs from
-                // (*it).get() in this context? Why 
-                rootNode = (*it).get(); // assign current node to root
+                // (*it).get() in this context? Why need to dereference?
+                rootNode = node.get(); // assign current node to root
             }
-            else
-            {
+            else {
                 std::cout << "ERROR : Multiple root nodes detected" << std::endl;
             }
         }
@@ -238,7 +251,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
     // add chatbot to graph root node
     _chatBot->SetRootNode(rootNode);
-    // _chatBot->SetRootNode(rootNode.get());
     rootNode->MoveChatbotHere(_chatBot);
     
     ////
