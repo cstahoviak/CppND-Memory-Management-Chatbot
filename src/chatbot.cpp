@@ -23,7 +23,7 @@ ChatBot::ChatBot()
 ChatBot::ChatBot(std::string filename)
 {
     cout << "ChatBot Constructor" << endl;
-    cout << "\tChatBot instantiated:\t\t" << this << endl;
+    // cout << "\tChatBot instantiated:\t\t" << this << endl;
     
     // invalidate data handles
     // Q: why not also include _currentNode?
@@ -32,7 +32,7 @@ ChatBot::ChatBot(std::string filename)
 
     // load image into heap memory
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
-    cout << "\tChatBot _image instantiated:\t" << _image << endl;
+    // cout << "\tChatBot _image instantiated:\t" << _image << endl;
 }
 
 ChatBot::~ChatBot()
@@ -42,10 +42,10 @@ ChatBot::~ChatBot()
     // deallocate heap memory
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
     {
-        cout << "\tChatBot _image deleted (1):\t" << _image << endl;
+        // cout << "\tChatBot _image deleted (1):\t" << _image << endl;
         delete _image;  // segfault happening at this line
         _image = NULL;  // Q: Why do this?
-        cout << "\tChatBot _image deleted (2):\t" << _image << endl;
+        // cout << "\tChatBot _image deleted (2):\t" << _image << endl;
     }
 }
 

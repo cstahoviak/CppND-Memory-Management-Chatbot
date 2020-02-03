@@ -18,7 +18,7 @@ ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
-    cout << "ChatLogic Constructor" << endl;
+    // cout << "ChatLogic Constructor" << endl;
 
     // create instance of chatbot
     // _chatBot = new ChatBot("../images/chatbot.png");
@@ -35,7 +35,7 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-    cout << "ChatLogic Destructor" << endl;
+    // cout << "ChatLogic Destructor" << endl;
 
     // delete chatbot instance
     // don't need to comment this out to fix the seg fault like I thought..
@@ -281,11 +281,12 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // TASK 5: Create Chatbot here rather than in ChatLogic Constructor so that
     // it can be pased (via move semantics) into the root node
 
-    // instantiate the ChatBot
+    // instantiate the ChatBot (on the HEAP? via make_unique)
     std::unique_ptr chatBot = std::make_unique<ChatBot>("../images/chatbot.png");
-    cout << "\t_chatBot instantiated:\t\t" << chatBot.get() << endl;
-    cout << "\troot node:\t\t\t" << rootNode << endl;
-    // assign ChatLogic class a non-owning reference to the ChatBot 
+    // cout << "\t_chatBot instantiated:\t\t" << chatBot.get() << endl;
+    // cout << "\troot node:\t\t\t" << rootNode << endl;
+
+    // assign ChatLogic class a non-owning refererootNode->MoveChatbotHere(std::move(chatBot));nce to the ChatBot 
     _chatBot = chatBot.get();
 
     chatBot->SetChatLogicHandle(this);
@@ -293,6 +294,13 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // move ChatBot into root node
     chatBot->SetRootNode(rootNode);
     rootNode->MoveChatbotHere(std::move(chatBot));
+
+    // create ChatBot on STACK rather than on HEAP as make_unique did
+    // ChatBot chatBot = ChatBot("../images/chatbot.png");
+    // _chatBot = &chatBot;
+    // chatBot.SetChatLogicHandle(this);
+    // chatBot.SetRootNode(rootNode);
+    // rootNode->MoveChatbotHere(std::move(chatBot));
     
     ////
     //// EOF STUDENT CODE
