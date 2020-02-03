@@ -23,6 +23,7 @@ ChatBot::ChatBot()
 ChatBot::ChatBot(std::string filename)
 {
     cout << "ChatBot Constructor" << endl;
+    cout << "\tChatBot instantiated:\t\t" << this << endl;
     
     // invalidate data handles
     // Q: why not also include _currentNode?

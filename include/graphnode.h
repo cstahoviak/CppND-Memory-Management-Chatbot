@@ -33,7 +33,8 @@ private:
     *  particular node, it becomes a valid (heap?) memory address. And
     *  when ChaBot leaves the node, this pointer is invalidated again."
     */
-    ChatBot *_chatBot;
+    // ChatBot *_chatBot;
+    std::unique_ptr<ChatBot> _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -66,8 +67,9 @@ public:
 
     // void AddEdgeToParentNode(std::unique_ptr<GraphEdge> edge);
     // void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);
-
-    void MoveChatbotHere(ChatBot *chatbot);
+    
+    // void MoveChatbotHere(ChatBot *chatbot)
+    void MoveChatbotHere(std::unique_ptr<ChatBot> chatbot);
     
     ////
     //// EOF STUDENT CODE

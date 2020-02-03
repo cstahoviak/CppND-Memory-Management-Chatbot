@@ -5,6 +5,8 @@
 #include <iostream>
 #include <memory>
 
+using namespace std;
+
 GraphNode::GraphNode(int id)
 {
     // std::cout << "GraphNode Constructor" << std::endl;
@@ -47,15 +49,20 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
 
 //// STUDENT CODE
 ////
-void GraphNode::MoveChatbotHere(ChatBot *chatbot)
+// void GraphNode::MoveChatbotHere(ChatBot *chatbot)
+void GraphNode::MoveChatbotHere(std::unique_ptr<ChatBot> chatbot)
 {
-    _chatBot = chatbot;
+    cout << "\tChatBot " << chatbot.get() << " moved to node " << this << endl;
+    // _chatBot = chatbot;
+    _chatBot = std::move(chatbot);
     _chatBot->SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(_chatBot);
+    cout << "Moving ChatBot " << _chatBot.get() << " from node " << this << endl;
+    // newNode->MoveChatbotHere(_chatBot);
+    newNode->MoveChatbotHere(std::move(_chatBot));
     _chatBot = nullptr; // invalidate pointer at source
 }
 ////

@@ -21,11 +21,11 @@ ChatLogic::ChatLogic()
     cout << "ChatLogic Constructor" << endl;
 
     // create instance of chatbot
-    _chatBot = new ChatBot("../images/chatbot.png");
-    cout << "\t_chatBot instantiated:\t\t" << _chatBot << endl;
+    // _chatBot = new ChatBot("../images/chatbot.png");
+    // cout << "\t_chatBot instantiated:\t\t" << _chatBot << endl;
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot->SetChatLogicHandle(this);
+    // _chatBot->SetChatLogicHandle(this);
 
     ////
     //// EOF STUDENT CODE
@@ -39,8 +39,8 @@ ChatLogic::~ChatLogic()
 
     // delete chatbot instance
     // don't need to comment this out to fix the seg fault like I thought..
-    cout << "\t_chatBot deleted:\t\t" << _chatBot << endl;
-    delete _chatBot;
+    // cout << "\t_chatBot deleted:\t\t" << _chatBot << endl;
+    // delete _chatBot;
 
     // NOTE: below is unfamiliar for loop syntax. Why not do this:
     // for( auto node : _nodes ) {
@@ -216,7 +216,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             (*childNode)->AddEdgeToParentNode(edge);
                             (*parentNode)->AddEdgeToChildNode(edge);
 
-                            // Why does this not work?
+                            // Why does this not work with edge as a unique_ptr?
                             // (*childNode)->AddEdgeToParentNode(edge.get());
                             // (*parentNode)->AddEdgeToChildNode(std::move(edge));
                         }
@@ -278,9 +278,21 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         }
     }
 
-    // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    // TASK 5: Create Chatbot here rather than in ChatLogic Constructor so that
+    // it can be pased (via move semantics) into the root node
+
+    // instantiate the ChatBot
+    std::unique_ptr chatBot = std::make_unique<ChatBot>("../images/chatbot.png");
+    cout << "\t_chatBot instantiated:\t\t" << chatBot.get() << endl;
+    cout << "\troot node:\t\t\t" << rootNode << endl;
+    // assign ChatLogic class a non-owning reference to the ChatBot 
+    _chatBot = chatBot.get();
+
+    chatBot->SetChatLogicHandle(this);
+
+    // move ChatBot into root node
+    chatBot->SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(std::move(chatBot));
     
     ////
     //// EOF STUDENT CODE
