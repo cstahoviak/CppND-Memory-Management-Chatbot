@@ -27,7 +27,7 @@ private:
     std::vector<std::unique_ptr<GraphNode>> _nodes;
 
     // NOTE: "ownership of edges to be moved into some of the nodes."
-    std::vector<GraphEdge *> _edges;
+    // std::vector<GraphEdge *> _edges;
 
     ////
     //// EOF STUDENT CODE

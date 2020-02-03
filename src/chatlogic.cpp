@@ -54,12 +54,13 @@ ChatLogic::~ChatLogic()
     //     delete *it;
     // }
 
+    // TASK 4: _edges removed from instances of ChatLogic
     // delete all edges
-    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-    {
-        // cout << "\tdeleting edge at:\t\t" << &it << endl;
-        delete *it;
-    }
+    // for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
+    // {
+    //     // cout << "\tdeleting edge at:\t\t" << &it << endl;
+    //     delete *it;
+    // }
 
     ////
     //// EOF STUDENT CODE
@@ -179,18 +180,45 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
                             // create new edge
                             GraphEdge *edge = new GraphEdge(id);
+
+                            /* Q: Make this a unique_ptr here?
+                            *  A: No, this causes a problem below - see comment "store
+                            * reference in child node and parent node". I think the
+                            * problem is that the unique_ptr edge is trying to be
+                            * copied and this is not allowed for unique_ptr
+                            */
+                            // unique_ptr<GraphEdge> edge = make_unique<GraphEdge>(id);
+
                             // edge->SetChildNode(*childNode);
                             // edge->SetParentNode(*parentNode);
                             edge->SetChildNode( (*childNode).get() );
                             edge->SetParentNode( (*parentNode).get() );
-                            _edges.push_back(edge);
+
+                            // NOTE: vector of edges removed from ChatLogic class
+                            // _edges.push_back(edge);
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
 
+                            /* TASK 4: Change ownership model of GraphEdges
+                            * Now: Edges owned by ChatLogic class
+                            * Goal: Transfer edge ownership to GraphNode instances
+                            * from which the edges originate, i.e. transfer
+                            * ownership to "parent" nodes
+                            * 
+                            * "Use move semantics when transferring ownership from
+                            * class ChatLogic into instances of GraphNode
+                            * 
+                            * NOTE: use unique_ptr only! Not shared_ptr!
+                            */
+
                             // store reference in child node and parent node
                             (*childNode)->AddEdgeToParentNode(edge);
                             (*parentNode)->AddEdgeToChildNode(edge);
+
+                            // Why does this not work?
+                            // (*childNode)->AddEdgeToParentNode(edge.get());
+                            // (*parentNode)->AddEdgeToChildNode(std::move(edge));
                         }
 
                         ////
