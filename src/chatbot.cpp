@@ -128,7 +128,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
 ChatBot::ChatBot(ChatBot &&source)
 {
     cout << "ChatBot Move Constructor" << endl;
-    cout << "Moving instance " << &source << " to instance " << this << endl;
+    // cout << "Moving instance " << &source << " to instance " << this << endl;
 
     this->_image       = source._image;
     this->_currentNode = source._currentNode;
@@ -152,7 +152,7 @@ ChatBot::ChatBot(ChatBot &&source)
 ChatBot &ChatBot::operator=(ChatBot &&source)
 {
     cout << "ChatBot Move Assignment Operator" << endl;
-    cout << "Moving instance " << &source << " to instance " << this << endl;
+    // cout << "Moving instance " << &source << " to instance " << this << endl;
 
     // protects against self-assignment
     if (this == &source) {

@@ -52,23 +52,24 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
 // input arg &&chatbot is an rvalue reference to a ChatBot object
 void GraphNode::MoveChatbotHere(ChatBot &&chatbot)
 {
-    string str = "MoveChatbotHere() ";
-    cout << str << "ChatBot " << &chatbot << " moved to node " << this << endl;
-    _chatBot = std::move(chatbot);
+    // string str = "MoveChatbotHere() ";
+    // cout << str << "ChatBot " << &chatbot << " moved to node " << this << endl;
+    _chatBot = std::move(chatbot);  // move assign operator
 
     // need to update ChatLogic._chatBot handle that points to the ChatBot
     _chatBot.GetChatLogicHandle()->SetChatbotHandle(&_chatBot);
-    cout << str << "ChatLogic instance " << _chatBot.GetChatLogicHandle() <<
-        " now points to ChatBot at " << &_chatBot << endl;
+    // cout << str << "ChatLogic instance " << _chatBot.GetChatLogicHandle() <<
+    //     " now points to ChatBot at " << &_chatBot << endl;
 
     _chatBot.SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    string str = "MoveChatbotToNewNode() ";
-    cout << str << "Moving ChatBot " << &_chatBot << " from node " << this << 
-        " to node " << newNode << endl;
+    // string str = "MoveChatbotToNewNode() ";
+    // cout << str << "Moving ChatBot " << &_chatBot << " from node " << this << 
+    //     " to node " << newNode << endl;
+
     newNode->MoveChatbotHere(std::move(_chatBot));
     // _chatBot = nullptr; // no longer necessary
 }
