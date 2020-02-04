@@ -299,7 +299,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     chatBot.SetChatLogicHandle(this);
     chatBot.SetRootNode(rootNode);
     // cout << str << "Passing ChatBot to root node:\t\t" << rootNode << endl;
-    rootNode->MoveChatbotHere(std::move(chatBot)); // pass an r-value ref
+
+    // pass an r-value ref - this does NOT call the move assignment operator
+    rootNode->MoveChatbotHere(std::move(chatBot)); 
 
     ////
     //// EOF STUDENT CODE
