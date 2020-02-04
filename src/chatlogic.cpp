@@ -273,8 +273,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     * assignment operator is executed on a previously constructed object. It is
     * exactly the same scenario as in the copy case.
     * 
-    * The only way that would force the Move Constructor to be called was in the
-    * following way:
+    * The only way that I could think of to force the Move Constructor to be
+    * called was in the following way:
     * 
     * 1. Create a ChatBot object (on the heap) via make_unique
     * 2. Use move sematics to move the heap-allocated ChatBot object into a local

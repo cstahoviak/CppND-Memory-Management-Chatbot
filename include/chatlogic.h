@@ -17,8 +17,7 @@ private:
     ////
 
     // data handles (owned)
-    // NOTE: _nodes (currently) stores a vector of raw pointers to
-    // GraphNode objects on the HEAP.
+    // NOTE: _nodes (currently) stores a vector of raw pointers to GraphNode objects on the HEAP.
     // std::vector<GraphNode *> _nodes;
 
     /* GOAL: "Adapt _nodes such that the instances of GraphNode objects to which
@@ -35,7 +34,6 @@ private:
     // data handles (not owned)
     GraphNode *_currentNode;
     ChatBot *_chatBot;
-    // std::unique_ptr<ChatBot> _chatBot;
     ChatBotPanelDialog *_panelDialog;
 
     // proprietary type definitions
