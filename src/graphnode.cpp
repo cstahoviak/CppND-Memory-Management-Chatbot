@@ -21,8 +21,6 @@ GraphNode::~GraphNode()
 
     // std::cout << "GraphNode Destructor" << std::endl;
 
-    // Q: Why does it not segfault at the delete statement??
-    // std::cout << "\t_chatBot deleted:\t\t" << _chatBot << std::endl;
     // delete _chatBot;     // commeted out to complete Task Zero
 
     ////
@@ -51,23 +49,6 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
 //// STUDENT CODE
 ////
 
-// void GraphNode::MoveChatbotHere(ChatBot *chatbot)
-// void GraphNode::MoveChatbotHere(std::unique_ptr<ChatBot> chatbot)
-// {
-//     cout << "\tChatBot " << chatbot.get() << " moved to node " << this << endl;
-//     // _chatBot = chatbot;
-//     _chatBot = std::move(chatbot);
-//     _chatBot->SetCurrentNode(this);
-// }
-
-// void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
-// {
-//     cout << "Moving ChatBot " << _chatBot.get() << " from node " << this << endl;
-//     // newNode->MoveChatbotHere(_chatBot);
-//     newNode->MoveChatbotHere(std::move(_chatBot));
-//     _chatBot = nullptr; // invalidate pointer at source
-// }
-
 // input arg &&chatbot is an rvalue reference to a ChatBot object
 void GraphNode::MoveChatbotHere(ChatBot &&chatbot)
 {
@@ -89,7 +70,7 @@ void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
     cout << str << "Moving ChatBot " << &_chatBot << " from node " << this << 
         " to node " << newNode << endl;
     newNode->MoveChatbotHere(std::move(_chatBot));
-    // _chatBot = nullptr; // invalidate pointer at source
+    // _chatBot = nullptr; // no longer necessary
 }
 ////
 //// EOF STUDENT CODE

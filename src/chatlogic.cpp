@@ -18,14 +18,8 @@ ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
-    cout << "ChatLogic Constructor" << endl;
 
-    // create instance of chatbot
-    // _chatBot = new ChatBot("../images/chatbot.png");
-    // cout << "\t_chatBot instantiated:\t\t" << _chatBot << endl;
-
-    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    // _chatBot->SetChatLogicHandle(this);
+    // cout << "ChatLogic Constructor" << endl;
 
     ////
     //// EOF STUDENT CODE
@@ -35,17 +29,7 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-    cout << "ChatLogic Destructor" << endl;
-
-    // delete chatbot instance
-    // don't need to comment this out to fix the seg fault like I thought..
-    // cout << "\t_chatBot deleted:\t\t" << _chatBot << endl;
-    // delete _chatBot;
-
-    // NOTE: below is unfamiliar for loop syntax. Why not do this:
-    // for( auto node : _nodes ) {
-    //     delete *node;
-    // }
+    // cout << "ChatLogic Destructor" << endl;
 
     // delete all nodes
     // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
@@ -173,8 +157,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         if (parentToken != tokens.end() && childToken != tokens.end())
                         {
                             // get iterator on incoming and outgoing node via ID search
-                            // auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](GraphNode *node) { return node->GetID() == std::stoi(parentToken->second); });
-                            // auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](GraphNode *node) { return node->GetID() == std::stoi(childToken->second); });
                             auto parentNode = std::find_if(_nodes.begin(), _nodes.end(), [&parentToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(parentToken->second); });
                             auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); });
 
@@ -189,8 +171,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             */
                             // unique_ptr<GraphEdge> edge = make_unique<GraphEdge>(id);
 
-                            // edge->SetChildNode(*childNode);
-                            // edge->SetParentNode(*parentNode);
                             edge->SetChildNode( (*childNode).get() );
                             edge->SetParentNode( (*parentNode).get() );
 
@@ -288,6 +268,19 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // TASK 5: Create Chatbot here rather than in ChatLogic Constructor so that
     // it can be pased (via move semantics) into the root node
 
+    /* NOTE: On Mvoe Constructor
+    * A move constructor is executed only when you construct an object. A move
+    * assignment operator is executed on a previously constructed object. It is
+    * exactly the same scenario as in the copy case.
+    * 
+    * The only way that would force the Move Constructor to be called was in the
+    * following way:
+    * 
+    * 1. Create a ChatBot object (on the heap) via make_unique
+    * 2. Use move sematics to move the heap-allocated ChatBot object into a local
+    *    (stack-allocated) ChatBot instance. This envokes the Move Constructor.
+    */
+
     string str = "LoadAnswerGraphFromFile() ";
 
     // create unique_ptr chatbot (on stack) to ChatBot object on heap
@@ -296,7 +289,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     cout << str << "chatbot object HEAP ADDRESS:\t\t" << chatbot.get() << endl;
 
     // create local (on stack) ChatBot object via move semantics (move constr.)
-    ChatBot chatBot = std::move(*chatbot);
+    ChatBot chatBot = std::move(*chatbot);  // move constructor
     cout << str << "chatBot STACK ADDRESS:\t\t" << &chatBot << endl;
 
     // set non-owning reference to ChatBot object (on stack)

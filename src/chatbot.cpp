@@ -45,14 +45,13 @@ ChatBot::~ChatBot()
         // cout << "\tChatBot _image deleted (1):\t" << _image << endl;
         delete _image;  // segfault happening at this line
         _image = NULL;  // Q: Why do this?
-        // cout << "\tChatBot _image deleted (2):\t" << _image << endl;
     }
 }
 
 //// STUDENT CODE
 ////
 
-// Q: What happens here? - RULE OF FIVE IMPLEMENTATION
+// RULE OF FIVE IMPLEMENTATION
 
 /* 2: COPY CONSTRUCTOR
 * The copy constructor takes an lvalue reference to the source
