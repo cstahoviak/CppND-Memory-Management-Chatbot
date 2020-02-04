@@ -18,7 +18,7 @@ ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
-    // cout << "ChatLogic Constructor" << endl;
+    cout << "ChatLogic Constructor" << endl;
 
     // create instance of chatbot
     // _chatBot = new ChatBot("../images/chatbot.png");
@@ -35,7 +35,7 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-    // cout << "ChatLogic Destructor" << endl;
+    cout << "ChatLogic Destructor" << endl;
 
     // delete chatbot instance
     // don't need to comment this out to fix the seg fault like I thought..
@@ -265,6 +265,13 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     //     }
     // }
 
+    /* NOTE: ON ITERATORS (from Sasha)
+    * "Basically iterators are to vectors what pointers are to arrays, plus the
+    * existence of the end() iterator and other features... *it provides access
+    * to the vector element currently pointed by the iterator it, and then the
+    * rest is invocation of a method of the vector element, e.g. get()"
+    */
+
     for( auto const &node_ptr : _nodes ) {
         // search for nodes which have no incoming edges
         if (node_ptr->GetNumberOfParents() == 0) {
@@ -281,27 +288,26 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     // TASK 5: Create Chatbot here rather than in ChatLogic Constructor so that
     // it can be pased (via move semantics) into the root node
 
-    // instantiate the ChatBot (on the HEAP? via make_unique)
-    std::unique_ptr chatBot = std::make_unique<ChatBot>("../images/chatbot.png");
-    // cout << "\t_chatBot instantiated:\t\t" << chatBot.get() << endl;
-    // cout << "\troot node:\t\t\t" << rootNode << endl;
+    string str = "LoadAnswerGraphFromFile() ";
 
-    // assign ChatLogic class a non-owning refererootNode->MoveChatbotHere(std::move(chatBot));nce to the ChatBot 
-    _chatBot = chatBot.get();
+    // create unique_ptr chatbot (on stack) to ChatBot object on heap
+    std::unique_ptr chatbot = std::make_unique<ChatBot>("../images/chatbot.png");
+    cout << str << "chatbot unique pointer STACK ADDRESS:\t" << &chatbot << endl;
+    cout << str << "chatbot object HEAP ADDRESS:\t\t" << chatbot.get() << endl;
 
-    chatBot->SetChatLogicHandle(this);
+    // create local (on stack) ChatBot object via move semantics (move constr.)
+    ChatBot chatBot = std::move(*chatbot);
+    cout << str << "chatBot STACK ADDRESS:\t\t" << &chatBot << endl;
 
-    // move ChatBot into root node
-    chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(std::move(chatBot));
+    // set non-owning reference to ChatBot object (on stack)
+    _chatBot = &chatBot;
+    cout << str << "ChatLogic instance " << this << " points to ChatBot at " << _chatBot << endl;
 
-    // create ChatBot on STACK rather than on HEAP as make_unique did
-    // ChatBot chatBot = ChatBot("../images/chatbot.png");
-    // _chatBot = &chatBot;
-    // chatBot.SetChatLogicHandle(this);
-    // chatBot.SetRootNode(rootNode);
-    // rootNode->MoveChatbotHere(std::move(chatBot));
-    
+    chatBot.SetChatLogicHandle(this);
+    chatBot.SetRootNode(rootNode);
+    cout << str << "Passing ChatBot to root node:\t\t" << rootNode << endl;
+    rootNode->MoveChatbotHere(std::move(chatBot)); // pass an r-value ref
+
     ////
     //// EOF STUDENT CODE
 }

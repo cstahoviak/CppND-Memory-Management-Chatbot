@@ -35,8 +35,10 @@ public:
     ////
     ChatBot(const ChatBot &source);             // copy constructor
     ChatBot &operator=(const ChatBot &source);  // copy assignment aoperator
-    ChatBot(ChatBot &&source);            // move constructor
-    ChatBot &operator=(ChatBot &&source); // move assignment aoperator
+    ChatBot(ChatBot &&source);                  // move constructor
+    ChatBot &operator=(ChatBot &&source);       // move assignment aoperator
+
+    ChatLogic* GetChatLogicHandle() { return _chatLogic; }
 
     ////
     //// EOF STUDENT CODE

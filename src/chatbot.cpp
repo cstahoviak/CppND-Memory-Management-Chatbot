@@ -95,10 +95,10 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
     }
 
     // Q: Do I need to delete any of the following?
-    delete _image;
-    delete _currentNode;
-    delete _rootNode;
-    delete _chatLogic;
+    // delete _image;
+    // delete _currentNode;
+    // delete _rootNode;
+    // delete _chatLogic;
 
     this->_image = new wxBitmap(*source._image);
 
@@ -161,10 +161,10 @@ ChatBot &ChatBot::operator=(ChatBot &&source)
     }
 
     // Q: Do I need to delete any of the following?
-    delete _image;
-    delete _currentNode;
-    delete _rootNode;
-    delete _chatLogic;
+    // delete _image;
+    // delete _currentNode;
+    // delete _rootNode;
+    // delete _chatLogic;
 
     this->_image       = source._image;
     this->_currentNode = source._currentNode;
