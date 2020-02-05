@@ -114,7 +114,7 @@ END_EVENT_TABLE()
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     : wxScrolledWindow(parent, id)
 {
-    // cout << "ChatBotPanelDialog Constructor" << endl;
+    cout << "ChatBotPanelDialog Constructor" << endl;
 
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
@@ -146,7 +146,7 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    // cout << "ChatBotPanelDialog Destructor" << endl;
+    cout << "ChatBotPanelDialog Destructor" << endl;
 
     ////
     //// EOF STUDENT CODE

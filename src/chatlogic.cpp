@@ -19,7 +19,7 @@ ChatLogic::ChatLogic()
     //// STUDENT CODE
     ////
 
-    // cout << "ChatLogic Constructor" << endl;
+    cout << "ChatLogic Constructor" << endl;
 
     ////
     //// EOF STUDENT CODE
@@ -29,7 +29,7 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-    // cout << "ChatLogic Destructor" << endl;
+    cout << "ChatLogic Destructor" << endl;
 
     // delete all nodes
     // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
@@ -284,20 +284,16 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     string str = "LoadAnswerGraphFromFile() ";
 
     // create unique_ptr chatbot (on stack) to ChatBot object on heap
-    std::unique_ptr chatbot = std::make_unique<ChatBot>("../images/chatbot.png");
+    std::unique_ptr chatBot = std::make_unique<ChatBot>("../images/chatbot.png");
     // cout << str << "chatbot unique pointer STACK ADDRESS:\t" << &chatbot << endl;
     // cout << str << "chatbot object HEAP ADDRESS:\t\t" << chatbot.get() << endl;
 
-    // create local (on stack) ChatBot object via move semantics (move constr.)
-    ChatBot chatBot = std::move(*chatbot);  // move constructor
-    // cout << str << "chatBot STACK ADDRESS:\t\t" << &chatBot << endl;
-
-    // set non-owning reference to ChatBot object (on stack)
-    _chatBot = &chatBot;
+    // set non-owning reference to heap-allocated ChatBot object
+    _chatBot = chatBot.get();
     // cout << str << "ChatLogic instance " << this << " points to ChatBot at " << _chatBot << endl;
 
-    chatBot.SetChatLogicHandle(this);
-    chatBot.SetRootNode(rootNode);
+    chatBot->SetChatLogicHandle(this);
+    chatBot->SetRootNode(rootNode);
     // cout << str << "Passing ChatBot to root node:\t\t" << rootNode << endl;
 
     // pass an r-value ref - this does NOT call the move assignment operator

@@ -37,7 +37,7 @@ private:
     *  support use of move sematics rather than a raw pointer to a
     *  ChatBot object.
     */
-    ChatBot _chatBot;
+    std::unique_ptr<ChatBot> _chatBot;
 
     ////
     //// EOF STUDENT CODE
@@ -71,7 +71,7 @@ public:
     // void AddEdgeToParentNode(std::unique_ptr<GraphEdge> edge);
     // void AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge);
     
-    void MoveChatbotHere(ChatBot &&chatbot);
+    void MoveChatbotHere(std::unique_ptr<ChatBot> chatbot);
     
     ////
     //// EOF STUDENT CODE
